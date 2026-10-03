@@ -1,0 +1,142 @@
+[
+    {
+        "id": "7c2a42835f9943b9",
+        "type": "tab",
+        "label": "Flow 10",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ee5ac95f28a61635",
+        "type": "inject",
+        "z": "7c2a42835f9943b9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 280,
+        "wires": [
+            [
+                "b4d96bef87df56e1"
+            ]
+        ]
+    },
+    {
+        "id": "b4d96bef87df56e1",
+        "type": "function",
+        "z": "7c2a42835f9943b9",
+        "name": "function 9",
+        "func": "const data = {\n    student: \"Zheleznyi\",\n    lab: \"Node-RED Lab 2\",\n    task: \"File write/read\",\n    time: new Date().toISOString()\n};\n\nmsg.payload = JSON.stringify(data, null, 2);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 280,
+        "wires": [
+            [
+                "a155886a65d84726"
+            ]
+        ]
+    },
+    {
+        "id": "a155886a65d84726",
+        "type": "file",
+        "z": "7c2a42835f9943b9",
+        "name": "",
+        "filename": "/data/lab2-data.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 770,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87b8336122b56914",
+        "type": "inject",
+        "z": "7c2a42835f9943b9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Read file",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "20ed984393bc7ada"
+            ]
+        ]
+    },
+    {
+        "id": "b1550935fe305491",
+        "type": "debug",
+        "z": "7c2a42835f9943b9",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "20ed984393bc7ada",
+        "type": "file in",
+        "z": "7c2a42835f9943b9",
+        "name": "",
+        "filename": "/data/lab2-data.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 590,
+        "y": 360,
+        "wires": [
+            [
+                "b1550935fe305491"
+            ]
+        ]
+    }
+]

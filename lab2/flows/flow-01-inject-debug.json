@@ -1,0 +1,56 @@
+[
+    {
+        "id": "cace2f95c272bc4c",
+        "type": "tab",
+        "label": "Поток 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3ec6152b83fa6d2b",
+        "type": "inject",
+        "z": "cace2f95c272bc4c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "lab2/Zheleznyi/basic",
+        "payload": "Zheleznyi",
+        "payloadType": "str",
+        "x": 390,
+        "y": 380,
+        "wires": [
+            [
+                "255fa511771fcd88"
+            ]
+        ]
+    },
+    {
+        "id": "255fa511771fcd88",
+        "type": "debug",
+        "z": "cace2f95c272bc4c",
+        "name": "Zheleznyi",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 380,
+        "wires": []
+    }
+]

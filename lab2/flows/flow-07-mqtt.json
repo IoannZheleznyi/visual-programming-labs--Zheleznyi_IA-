@@ -1,0 +1,146 @@
+[
+    {
+        "id": "425bee4f7ad72631",
+        "type": "tab",
+        "label": "Flow 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f232d4beba95bc61",
+        "type": "inject",
+        "z": "425bee4f7ad72631",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 360,
+        "wires": [
+            [
+                "24b6c0cab69a71d9"
+            ]
+        ]
+    },
+    {
+        "id": "9939b9570cb57c40",
+        "type": "debug",
+        "z": "425bee4f7ad72631",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2e633bc1c22a0a57",
+        "type": "mqtt out",
+        "z": "425bee4f7ad72631",
+        "name": "",
+        "topic": "student/Zheleznyi/lab2/random",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "dad7297dd04116d3",
+        "x": 590,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "03c918ad60eae38b",
+        "type": "mqtt in",
+        "z": "425bee4f7ad72631",
+        "name": "",
+        "topic": "student/Zheleznyi/lab2/random",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "dad7297dd04116d3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "9939b9570cb57c40"
+            ]
+        ]
+    },
+    {
+        "id": "24b6c0cab69a71d9",
+        "type": "function",
+        "z": "425bee4f7ad72631",
+        "name": "function 3",
+        "func": "let value = Math.floor(Math.random() * 100);\n\nmsg.payload = value;\nmsg.topic = \"student/Zheleznyi/lab2/random\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "2e633bc1c22a0a57"
+            ]
+        ]
+    },
+    {
+        "id": "dad7297dd04116d3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

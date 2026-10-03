@@ -1,0 +1,157 @@
+[
+    {
+        "id": "fa407f2b8a7bb0b9",
+        "type": "tab",
+        "label": "Flow 7",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8b02838e1ab45f9b",
+        "type": "http in",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "",
+        "url": "/api/text",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "f826c4401ac94c99"
+            ]
+        ]
+    },
+    {
+        "id": "aacce341816c9bd9",
+        "type": "http in",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "",
+        "url": "/api/info",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 300,
+        "wires": [
+            [
+                "2c7544ebdf6c73f7"
+            ]
+        ]
+    },
+    {
+        "id": "292a4cbb70a7f57c",
+        "type": "http in",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "",
+        "url": "/api/items",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 420,
+        "wires": [
+            [
+                "fe9f5a080ebfc050"
+            ]
+        ]
+    },
+    {
+        "id": "f826c4401ac94c99",
+        "type": "function",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "function 4",
+        "func": "msg.payload = \"Node-RED Lab 2: GET endpoint works\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "28e139c4706ec6b4"
+            ]
+        ]
+    },
+    {
+        "id": "2c7544ebdf6c73f7",
+        "type": "function",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "function 5",
+        "func": "msg.payload = {\n    student: \"Zheleznyi\",\n    group: \"DL2026\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 300,
+        "wires": [
+            [
+                "1a20ca25617c2525"
+            ]
+        ]
+    },
+    {
+        "id": "fe9f5a080ebfc050",
+        "type": "function",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "function 6",
+        "func": "const id = Number(msg.req.query.id);\n\nconst items = {\n    1: \"Node-RED\",\n    2: \"MQTT\",\n    3: \"Dashboard\"\n};\n\nif (!msg.req.query.id) {\n    msg.statusCode = 400;\n    msg.payload = {\n        error: \"Parameter id is required\"\n    };\n} else if (!items[id]) {\n    msg.statusCode = 404;\n    msg.payload = {\n        error: \"Item not found\"\n    };\n} else {\n    msg.statusCode = 200;\n    msg.payload = {\n        id: id,\n        name: items[id]\n    };\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 420,
+        "wires": [
+            [
+                "c48fc456b3909622"
+            ]
+        ]
+    },
+    {
+        "id": "28e139c4706ec6b4",
+        "type": "http response",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1a20ca25617c2525",
+        "type": "http response",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c48fc456b3909622",
+        "type": "http response",
+        "z": "fa407f2b8a7bb0b9",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 420,
+        "wires": []
+    }
+]

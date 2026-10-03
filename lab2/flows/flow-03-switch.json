@@ -1,0 +1,124 @@
+[
+    {
+        "id": "b488a0d294667664",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9157023564b2d181",
+        "type": "inject",
+        "z": "b488a0d294667664",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "lab2/Zheleznyi/switch",
+        "payload": "3",
+        "payloadType": "num",
+        "x": 300,
+        "y": 300,
+        "wires": [
+            [
+                "c5f41c59636449e6"
+            ]
+        ]
+    },
+    {
+        "id": "c5f41c59636449e6",
+        "type": "function",
+        "z": "b488a0d294667664",
+        "name": "function 2",
+        "func": "const numbers = [1, 2, 3, 4, 5];\nlet sum = 0;\n\nfor (let i = 0; i < numbers.length; i++) {\n    sum += numbers[i];\n}\n\nlet message;\n\nif (msg.payload > 5) {\n    message = \"Число больше 5\";\n} else {\n    message = \"Число меньше или равно 5\";\n}\n\nmsg.result = {\n    input: msg.payload,\n    sum: sum,\n    message: message\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 300,
+        "wires": [
+            [
+                "4e8210055f2eec5a"
+            ]
+        ]
+    },
+    {
+        "id": "4e8210055f2eec5a",
+        "type": "switch",
+        "z": "b488a0d294667664",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "5",
+                "vt": "num"
+            },
+            {
+                "t": "lte",
+                "v": "5",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "9f3936987c72d0e0"
+            ],
+            [
+                "57c7fd90af5c350c"
+            ]
+        ]
+    },
+    {
+        "id": "9f3936987c72d0e0",
+        "type": "debug",
+        "z": "b488a0d294667664",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "57c7fd90af5c350c",
+        "type": "debug",
+        "z": "b488a0d294667664",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 360,
+        "wires": []
+    }
+]

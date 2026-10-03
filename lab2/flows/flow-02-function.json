@@ -1,0 +1,76 @@
+[
+    {
+        "id": "cfa9a15b5cd19649",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3440b301476e2e93",
+        "type": "inject",
+        "z": "cfa9a15b5cd19649",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "lab2/Zheleznyi/function",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "4f50014cc2699e46"
+            ]
+        ]
+    },
+    {
+        "id": "4f50014cc2699e46",
+        "type": "function",
+        "z": "cfa9a15b5cd19649",
+        "name": "function 1",
+        "func": "const numbers = [1, 2, 3, 4, 5];\nlet sum = 0;\n\nfor (let i = 0; i < numbers.length; i++) {\n    sum += numbers[i];\n}\n\nlet result;\n\nif (msg.payload > 5) {\n    result = {\n        input: msg.payload,\n        sum: sum,\n        message: \"Число больше 5\"\n    };\n} else {\n    result = {\n        input: msg.payload,\n        sum: sum,\n        message: \"Число меньше или равно 5\"\n    };\n}\n\nmsg.payload = result;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 360,
+        "wires": [
+            [
+                "26ea55f795feed30"
+            ]
+        ]
+    },
+    {
+        "id": "26ea55f795feed30",
+        "type": "debug",
+        "z": "cfa9a15b5cd19649",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 360,
+        "wires": []
+    }
+]

@@ -1,0 +1,515 @@
+[
+    {
+        "id": "8fc16f32cf9a5477",
+        "type": "tab",
+        "label": "Flow 12",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cc234783eff09465",
+        "type": "inject",
+        "z": "8fc16f32cf9a5477",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create students",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 280,
+        "wires": [
+            [
+                "e1a655d528288e08"
+            ]
+        ]
+    },
+    {
+        "id": "e1a655d528288e08",
+        "type": "function",
+        "z": "8fc16f32cf9a5477",
+        "name": "function 11",
+        "func": "msg.topic = `\nCREATE TABLE IF NOT EXISTS students (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    name TEXT NOT NULL,\n    group_name TEXT NOT NULL\n);\n\nCREATE TABLE IF NOT EXISTS tasks (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    title TEXT NOT NULL,\n    status TEXT NOT NULL\n);\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 280,
+        "wires": [
+            [
+                "8d87c47ec140e705"
+            ]
+        ]
+    },
+    {
+        "id": "bc9c46f0589fd7be",
+        "type": "debug",
+        "z": "8fc16f32cf9a5477",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8d87c47ec140e705",
+        "type": "sqlite",
+        "z": "8fc16f32cf9a5477",
+        "mydb": "e31b6c1b46267d75",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 700,
+        "y": 280,
+        "wires": [
+            [
+                "bc9c46f0589fd7be"
+            ]
+        ]
+    },
+    {
+        "id": "9c4f630218a5584c",
+        "type": "sqlite",
+        "z": "8fc16f32cf9a5477",
+        "mydb": "e31b6c1b46267d75",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 700,
+        "y": 440,
+        "wires": [
+            [
+                "4f3fa1bdd1b41beb"
+            ]
+        ]
+    },
+    {
+        "id": "446f8c5c96ccfc95",
+        "type": "inject",
+        "z": "8fc16f32cf9a5477",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "insert students",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "7229c1c9b3a19530"
+            ]
+        ]
+    },
+    {
+        "id": "7229c1c9b3a19530",
+        "type": "function",
+        "z": "8fc16f32cf9a5477",
+        "name": "function 12",
+        "func": "msg.topic = `\nINSERT INTO students (name, group_name)\nVALUES\n    ('Zheleznyi', 'DL2026'),\n    ('Ivanov', 'DL2026'),\n    ('Petrov', 'DL2026');\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "9c4f630218a5584c"
+            ]
+        ]
+    },
+    {
+        "id": "4f3fa1bdd1b41beb",
+        "type": "debug",
+        "z": "8fc16f32cf9a5477",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "be05b23bd265e02a",
+        "type": "inject",
+        "z": "8fc16f32cf9a5477",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select students",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 520,
+        "wires": [
+            [
+                "5e21c969780b2943"
+            ]
+        ]
+    },
+    {
+        "id": "5e21c969780b2943",
+        "type": "function",
+        "z": "8fc16f32cf9a5477",
+        "name": "function 13",
+        "func": "msg.topic = \"SELECT * FROM students\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 520,
+        "wires": [
+            [
+                "3d63c0673b1f1a5a"
+            ]
+        ]
+    },
+    {
+        "id": "b7ee1f2526180111",
+        "type": "debug",
+        "z": "8fc16f32cf9a5477",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "3d63c0673b1f1a5a",
+        "type": "sqlite",
+        "z": "8fc16f32cf9a5477",
+        "mydb": "e31b6c1b46267d75",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 700,
+        "y": 520,
+        "wires": [
+            [
+                "b7ee1f2526180111"
+            ]
+        ]
+    },
+    {
+        "id": "c0e35f8c7d86aebc",
+        "type": "inject",
+        "z": "8fc16f32cf9a5477",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "insert tasks",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 600,
+        "wires": [
+            [
+                "9772a8ed2195a08b"
+            ]
+        ]
+    },
+    {
+        "id": "9cab3f018628cba9",
+        "type": "debug",
+        "z": "8fc16f32cf9a5477",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "9772a8ed2195a08b",
+        "type": "function",
+        "z": "8fc16f32cf9a5477",
+        "name": "function 14",
+        "func": "msg.topic = `\nINSERT INTO tasks (title, status)\nVALUES\n    ('Node-RED Lab 2', 'completed'),\n    ('SQLite', 'in progress'),\n    ('Dashboard', 'completed');\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "6836ddd84f53db95"
+            ]
+        ]
+    },
+    {
+        "id": "6836ddd84f53db95",
+        "type": "sqlite",
+        "z": "8fc16f32cf9a5477",
+        "mydb": "e31b6c1b46267d75",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 700,
+        "y": 600,
+        "wires": [
+            [
+                "9cab3f018628cba9"
+            ]
+        ]
+    },
+    {
+        "id": "31dc4f8da25c8969",
+        "type": "sqlite",
+        "z": "8fc16f32cf9a5477",
+        "mydb": "e31b6c1b46267d75",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 700,
+        "y": 680,
+        "wires": [
+            [
+                "eb623a52f7fb1123"
+            ]
+        ]
+    },
+    {
+        "id": "361283e95dcb94d1",
+        "type": "inject",
+        "z": "8fc16f32cf9a5477",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select tasks",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 680,
+        "wires": [
+            [
+                "04d7f68e0892ab5a"
+            ]
+        ]
+    },
+    {
+        "id": "eb623a52f7fb1123",
+        "type": "debug",
+        "z": "8fc16f32cf9a5477",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "04d7f68e0892ab5a",
+        "type": "function",
+        "z": "8fc16f32cf9a5477",
+        "name": "function 15",
+        "func": "msg.topic = \"SELECT * FROM tasks;\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 680,
+        "wires": [
+            [
+                "31dc4f8da25c8969"
+            ]
+        ]
+    },
+    {
+        "id": "81768b7ffe4ecb2a",
+        "type": "inject",
+        "z": "8fc16f32cf9a5477",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create tasks",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 360,
+        "wires": [
+            [
+                "e4d6b1c5eced7b5e"
+            ]
+        ]
+    },
+    {
+        "id": "e4d6b1c5eced7b5e",
+        "type": "function",
+        "z": "8fc16f32cf9a5477",
+        "name": "function 16",
+        "func": "msg.topic = `\nCREATE TABLE IF NOT EXISTS tasks (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    title TEXT NOT NULL,\n    status TEXT NOT NULL\n);\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "09fd382d890a16dd"
+            ]
+        ]
+    },
+    {
+        "id": "7500481fce17b28c",
+        "type": "debug",
+        "z": "8fc16f32cf9a5477",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "09fd382d890a16dd",
+        "type": "sqlite",
+        "z": "8fc16f32cf9a5477",
+        "mydb": "e31b6c1b46267d75",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 700,
+        "y": 360,
+        "wires": [
+            [
+                "7500481fce17b28c"
+            ]
+        ]
+    },
+    {
+        "id": "e31b6c1b46267d75",
+        "type": "sqlitedb",
+        "db": "/data/lab2.sqlite",
+        "mode": "RWC"
+    },
+    {
+        "id": "dce562d2b7af27a2",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-sqlite": "2.0.1"
+        }
+    }
+]

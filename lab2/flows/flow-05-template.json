@@ -1,0 +1,75 @@
+[
+    {
+        "id": "0b1f3d9ddfd56070",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "17b4daac1b443890",
+        "type": "inject",
+        "z": "0b1f3d9ddfd56070",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{     \"name\": \"Zheleznyi\",     \"group\": \"DL2026\",     \"task\": \"Node-RED Lab 2\" }",
+        "payloadType": "json",
+        "x": 170,
+        "y": 320,
+        "wires": [
+            [
+                "bc37d82552ef60ec"
+            ]
+        ]
+    },
+    {
+        "id": "bc37d82552ef60ec",
+        "type": "template",
+        "z": "0b1f3d9ddfd56070",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"student\": \"{{payload.name}}\",\n    \"group\": \"{{payload.group}}\",\n    \"assignment\": \"{{payload.task}}\"\n}",
+        "output": "str",
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "1e1e07ad4d036b44"
+            ]
+        ]
+    },
+    {
+        "id": "1e1e07ad4d036b44",
+        "type": "debug",
+        "z": "0b1f3d9ddfd56070",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 320,
+        "wires": []
+    }
+]

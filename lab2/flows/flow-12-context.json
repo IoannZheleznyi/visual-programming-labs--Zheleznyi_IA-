@@ -1,0 +1,76 @@
+[
+    {
+        "id": "e4fd6820da07b4fc",
+        "type": "tab",
+        "label": "Flow 11",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2889ce94b0a7a164",
+        "type": "inject",
+        "z": "e4fd6820da07b4fc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Increment counter",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "aa59d420f15312fb"
+            ]
+        ]
+    },
+    {
+        "id": "aa59d420f15312fb",
+        "type": "function",
+        "z": "e4fd6820da07b4fc",
+        "name": "function 10",
+        "func": "let counter = flow.get(\"counter\") || 0;\n\ncounter++;\n\nflow.set(\"counter\", counter);\n\nmsg.payload = {\n    counter: counter,\n    message: \"Счётчик хранится в flow context\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 340,
+        "wires": [
+            [
+                "8adbdee230a5f48d"
+            ]
+        ]
+    },
+    {
+        "id": "8adbdee230a5f48d",
+        "type": "debug",
+        "z": "e4fd6820da07b4fc",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 340,
+        "wires": []
+    }
+]

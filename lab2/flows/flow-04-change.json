@@ -1,0 +1,97 @@
+[
+    {
+        "id": "67eb6a54c4354f81",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "65ee96cbcab7cb61",
+        "type": "inject",
+        "z": "67eb6a54c4354f81",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Zheleznyi",
+        "payloadType": "str",
+        "x": 240,
+        "y": 340,
+        "wires": [
+            [
+                "744160851eef3e5f"
+            ]
+        ]
+    },
+    {
+        "id": "744160851eef3e5f",
+        "type": "change",
+        "z": "67eb6a54c4354f81",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "lab2/Zheleznyi/change",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Сообщение обработано через Change node",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 340,
+        "wires": [
+            [
+                "cbc49a3c2fca5e5f"
+            ]
+        ]
+    },
+    {
+        "id": "cbc49a3c2fca5e5f",
+        "type": "debug",
+        "z": "67eb6a54c4354f81",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 340,
+        "wires": []
+    }
+]
