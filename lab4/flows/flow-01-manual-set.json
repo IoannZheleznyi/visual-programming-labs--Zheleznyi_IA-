@@ -1,0 +1,95 @@
+{
+  "name": "flow-01-manual-set",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        -16
+      ],
+      "id": "e96404c3-ab15-49c8-a8b1-f33732d774bb",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b23947b5-0278-4fa6-a1bc-e0a10eda2d4b",
+              "name": "payload",
+              "value": "Zheleznyi",
+              "type": "string"
+            },
+            {
+              "id": "fdad8418-ea4c-4f2a-acc6-24b6c9cf64d7",
+              "name": "topic",
+              "value": "lab4/Zheleznyi/basic",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -128,
+        -16
+      ],
+      "id": "819c128d-33e0-4cc3-b536-d61c304192d0",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Получаем данные из предыдущей ноды Set\nconst item = $input.first().json;\n\n// Выводим в консоль (будет видно в панели Output / в логах контейнера)\nconsole.log(\"Полученные данные:\", item);\n\n// Возвращаем объект дальше по флоу\nreturn {\n  json: {\n    received_payload: item.payload,\n    received_topic: item.topic,\n    status: \"success\"\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        48,
+        -16
+      ],
+      "id": "78a96d4c-0553-4240-8d26-d52600e3fc8f",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "336258fe-ec29-44f7-996f-59fdee5006f4",
+  "meta": {
+    "instanceId": "5d1f85ef810c67a6f24f0cc910ab89655ff72791c5f4a1f3c57247db48693d25"
+  },
+  "nodeGroups": [],
+  "id": "GXD7K6dqPe6qwHJx",
+  "tags": []
+}

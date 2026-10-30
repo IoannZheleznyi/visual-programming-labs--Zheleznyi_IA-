@@ -1,0 +1,86 @@
+{
+  "name": "flow-05-http",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        -16
+      ],
+      "id": "09dcc859-7f57-4e60-b246-846d31a75efc",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://api.chucknorris.io/jokes/random",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -64,
+        -16
+      ],
+      "id": "91ef6f77-f6c1-4e01-8b41-4fcd30cf63fb",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Получаем ответ от API\nconst apiResponse = $input.first().json;\n\n// Проверяем, что API вернул шутку\nif (apiResponse && apiResponse.value) {\n  return {\n    json: {\n      status: \"success\",\n      joke: apiResponse.value,\n      source: apiResponse.url\n    }\n  };\n} else {\n  return {\n    json: {\n      status: \"error\",\n      message: \"Не удалось получить шутку\"\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        -16
+      ],
+      "id": "7241fcf5-0d37-4dca-86fe-b4708a2d60a1",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b8084a22-6447-4389-a591-451f57072745",
+  "meta": {
+    "instanceId": "5d1f85ef810c67a6f24f0cc910ab89655ff72791c5f4a1f3c57247db48693d25"
+  },
+  "nodeGroups": [],
+  "id": "AEPXZotQj9FKyTsE",
+  "tags": []
+}

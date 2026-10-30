@@ -1,0 +1,161 @@
+{
+  "name": "flow-12-google-webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6fd14034-1372-4343-a9ca-f0fd5122789c",
+              "name": "date",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "44cd9989-1f0a-41e1-9d59-180e857485f9",
+              "name": "user ",
+              "value": "Web-user",
+              "type": "string"
+            },
+            {
+              "id": "102b6ad4-9b31-4f63-9b83-ee1b9e8cd3bc",
+              "name": "text",
+              "value": "={{ $json.query.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "698390bc-651d-40da-b2b8-53044980e36a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1s8bK4Rkovci2b4hcVd6qpNRirCk1eRh_xpqYtjwlrEM/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Лист1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s8bK4Rkovci2b4hcVd6qpNRirCk1eRh_xpqYtjwlrEM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Дата",
+              "displayName": "Дата",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Пользователь",
+              "displayName": "Пользователь",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Текст",
+              "displayName": "Текст",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        448,
+        0
+      ],
+      "id": "6b4fb2f6-dd0f-477b-baa9-4d3a6889cd12",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1JsBKV6nHk0TVxH7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "lab4-google",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fa857710-ad75-4807-92ea-abc51781baaa",
+      "name": "Webhook",
+      "webhookId": "105d4d5f-179f-4545-9210-b173d1e17a0b"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "207d6936-f34d-4ce5-8ab5-632917bd4e9a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5d1f85ef810c67a6f24f0cc910ab89655ff72791c5f4a1f3c57247db48693d25"
+  },
+  "nodeGroups": [],
+  "id": "7JxG1lJvnZ1HFFLj",
+  "tags": []
+}

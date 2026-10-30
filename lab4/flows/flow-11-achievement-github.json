@@ -1,0 +1,105 @@
+{
+  "name": "flow-11-achievement-github",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        16
+      ],
+      "id": "ccf01b13-a9f1-497c-a3f8-4897e04e41a3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Получаем ответ от GitHub\nconst fileData = $input.first().json;\n\n// Проверяем, что файл получен\nif (fileData && fileData.content) {\n  // GitHub отдает контент в Base64. Декодируем его обратно в текст\n  // Buffer.from(..., 'base64') переводит из Base64 в байты\n  // .toString('utf-8') переводит байты в читаемый текст\n  const decodedContent = Buffer.from(fileData.content, 'base64').toString('utf-8');\n  \n  return {\n    json: {\n      status: \"success\",\n      message: \"Файл README.md успешно прочитан!\",\n      file_name: fileData.name,\n      // Берем первые 300 символов, чтобы не выводить весь текст в таблицу (иначе она растянется)\n      preview: decodedContent.substring(0, 300) + \"...\\n(текст обрезан для предпросмотра)\",\n      size_bytes: fileData.size\n    }\n  };\n} else {\n  return {\n    json: {\n      status: \"error\",\n      message: \"Не удалось прочитать файл или файл пуст\"\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        16
+      ],
+      "id": "6363cb6e-4c05-45de-8c7e-ea27fa255fd6",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "IoannZheleznyi",
+          "mode": "list",
+          "cachedResultName": "IoannZheleznyi",
+          "cachedResultUrl": "https://github.com/IoannZheleznyi"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "visual-programming-labs--Zheleznyi_IA-",
+          "mode": "list",
+          "cachedResultName": "visual-programming-labs--Zheleznyi_IA-",
+          "cachedResultUrl": "https://github.com/IoannZheleznyi/visual-programming-labs--Zheleznyi_IA-"
+        },
+        "filePath": "README.md",
+        "asBinaryProperty": false,
+        "additionalParameters": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        -112,
+        16
+      ],
+      "id": "5c491854-4090-411a-8edf-c19484cf4a32",
+      "name": "Get a file",
+      "webhookId": "136a602e-3061-418f-9f83-4db70d9b9750",
+      "credentials": {
+        "githubApi": {
+          "id": "oc8PrPMHtraaAPMW",
+          "name": "GitHub account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "41b09462-9a67-428b-a6fe-b46b3500e736",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5d1f85ef810c67a6f24f0cc910ab89655ff72791c5f4a1f3c57247db48693d25"
+  },
+  "nodeGroups": [],
+  "id": "WJ7lz9qQdXbSZ2LH",
+  "tags": []
+}
